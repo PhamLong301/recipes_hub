@@ -16,7 +16,34 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Text('Home'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 30,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Checkbox(
+                          onChanged: (value) {},
+                          value: false,
+                        )),
+                        Expanded(
+                          child: Text('Ingredient Filter'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                // shrinkWrap: true,
+                itemCount: 10,
+              );
+            },
+          );
+        },
         child: Icon(
           Ionicons.filter,
           color: Colors.white70,
