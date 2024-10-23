@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "667996491555",
+    "project_id": "recipes-hub-app-eae48",
+    "storage_bucket": "recipes-hub-app-eae48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667996491555:android:cd4e9b8fa9fac5c9d14696",
+        "android_client_info": {
+          "package_name": "com.example.recipes_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAveTXuwy5sTem63JCpYf7cO7-3WhEznNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
