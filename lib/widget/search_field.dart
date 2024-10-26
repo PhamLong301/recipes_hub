@@ -19,7 +19,7 @@ class SearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide(
             color: Colors.grey,
-            width: 2.0,
+            width: 1.0,
           ),
         ),
         hintText: hintText,

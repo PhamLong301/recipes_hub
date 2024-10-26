@@ -29,6 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 hintText: 'Find your recipes',
                 searchFieldController: searchRecipesController,
               ),
+              Divider(),
               Container(
                 child: ListView.builder(
                   shrinkWrap: true,
