@@ -16,9 +16,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recipes Hub'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Recipes Hub'),
+      // ),
       body: SafeArea(
         child: Obx(() => bottomNavigationController.currentScreen),
       ),

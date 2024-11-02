@@ -32,18 +32,18 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 searchFieldController: searchFavoriteController,
               ),
               Divider(),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return DishItem(
-                      widthSize: MediaQuery.of(context).size.width,
-                      heightSize: 200,
-                      marginSize: EdgeInsets.only(bottom: 10),
-                    );
-                  },),
-              ),
+              // Expanded(
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     itemCount: 5,
+              //     itemBuilder: (context, index) {
+              //       return DishItem(
+              //         widthSize: MediaQuery.of(context).size.width,
+              //         heightSize: 200,
+              //         marginSize: EdgeInsets.only(bottom: 10),
+              //       );
+              //     },),
+              // ),
             ],
           ),
         ),

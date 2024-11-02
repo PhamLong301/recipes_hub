@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 
 class DishItem extends StatefulWidget {
-  const DishItem({super.key, required this.widthSize, required this.heightSize, required this.marginSize});
+  const DishItem({
+    super.key,
+    required this.widthSize,
+    required this.heightSize,
+    required this.marginSize,
+    required this.urlImage,
+    required this.dishName,
+    required this.servingsQuantity,
+    required this.score,
+  });
+
   final double widthSize;
   final double heightSize;
   final EdgeInsetsGeometry marginSize;
+  final String urlImage;
+  final String dishName;
+  final int servingsQuantity;
+  final double score;
+
   @override
   State<DishItem> createState() => _DishItemState();
 }
@@ -15,52 +30,76 @@ class _DishItemState extends State<DishItem> {
     return Container(
       width: widget.widthSize,
       height: widget.heightSize,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.grey, // Border color
-          width: 1, // Border width
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   color: Colors.white,
+      //   borderRadius: BorderRadius.circular(10),
+      //   border: Border.all(
+      //     color: Colors.grey, // Border color
+      //     width: 1, // Border width
+      //   ),
+      // ),
       margin: widget.marginSize,
       child: Stack(
         children: [
-          // Image.network('aaa'),
-          // Container(
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(10),
-          //     color: Color(0xff70B9BE),
-          //   ),
-          // ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              widget.urlImage,
+              fit: BoxFit.cover,
+              width: widget.widthSize,
+              height: widget.heightSize,
+            ),
+          ),
           const Positioned(
             right: 5,
             top: 5,
-            child: Icon(Icons.favorite_border),
+            child: Icon(Icons.favorite, color: Colors.white,),
           ),
-          const Positioned(
+          Positioned(
             left: 5,
             bottom: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dish name'),
+                Text(
+                  widget.dishName,
+                  style: TextStyle(color: Colors.white),
+                ),
                 Row(
                   children: [
-                    Row(children: [
-                      Icon(Icons.timer),
-                      Text('10 phut')
-                    ],),
-                    SizedBox(width: 20,),
-                    Row(children: [
-                      Icon(Icons.person),
-                      Text('10')
-                    ],),
-                    SizedBox(width: 20,),
-                    Row(children: [
-                      Icon(Icons.star),
-                      Text('4.5')
-                    ],),
+                    // Row(
+                    //   children: [Icon(Icons.timer), Text('10 phut')],
+                    // ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          '${widget.servingsQuantity} persons',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Text('${widget.score}',
+                        style: TextStyle(
+                          color: Colors.white
+                        ),)
+                      ],
+                    ),
                   ],
                 )
               ],
