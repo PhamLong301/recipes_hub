@@ -5,7 +5,7 @@ import 'package:recipes_hub/view/main_screens/home_screen.dart';
 import 'package:recipes_hub/view/main_screens/search_screen.dart';
 import 'package:recipes_hub/view/main_screens/setting_screen.dart';
 
-class BottomNavigationController extends GetxController{
+class NavigationController extends GetxController{
   RxInt indexScreen = 0.obs;
 
   List<Widget> pages = [

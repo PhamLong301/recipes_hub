@@ -8,8 +8,6 @@ class DishItem extends StatefulWidget {
     required this.marginSize,
     required this.urlImage,
     required this.dishName,
-    required this.servingsQuantity,
-    required this.score,
   });
 
   final double widthSize;
@@ -17,8 +15,6 @@ class DishItem extends StatefulWidget {
   final EdgeInsetsGeometry marginSize;
   final String urlImage;
   final String dishName;
-  final int servingsQuantity;
-  final double score;
 
   @override
   State<DishItem> createState() => _DishItemState();
@@ -30,14 +26,18 @@ class _DishItemState extends State<DishItem> {
     return Container(
       width: widget.widthSize,
       height: widget.heightSize,
-      // decoration: BoxDecoration(
-      //   color: Colors.white,
-      //   borderRadius: BorderRadius.circular(10),
-      //   border: Border.all(
-      //     color: Colors.grey, // Border color
-      //     width: 1, // Border width
-      //   ),
-      // ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(1),
+            spreadRadius: 2,
+            blurRadius: 6,
+            offset: Offset(3, 3),
+          ),
+        ],
+      ),
       margin: widget.marginSize,
       child: Stack(
         children: [
@@ -65,43 +65,6 @@ class _DishItemState extends State<DishItem> {
                   widget.dishName,
                   style: TextStyle(color: Colors.white),
                 ),
-                Row(
-                  children: [
-                    // Row(
-                    //   children: [Icon(Icons.timer), Text('10 phut')],
-                    // ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '${widget.servingsQuantity} persons',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Text('${widget.score}',
-                        style: TextStyle(
-                          color: Colors.white
-                        ),)
-                      ],
-                    ),
-                  ],
-                )
               ],
             ),
           ),

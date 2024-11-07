@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:recipes_hub/controller/random_recipes_controller.dart';
-import 'package:recipes_hub/model/random_recipes.dart';
+import 'package:recipes_hub/controller/recipes_controller.dart';
+import 'package:recipes_hub/view/main_screens/favorite_screen.dart';
+import 'package:recipes_hub/view/main_screens/search_screen.dart';
+import 'package:recipes_hub/view/main_screens/setting_screen.dart';
 import 'package:recipes_hub/widget/dish_item.dart';
+import 'package:recipes_hub/widget/drawer_list_view.dart';
+import 'package:recipes_hub/widget/log_in_widget.dart';
+import 'package:recipes_hub/widget/log_out_wigdet.dart';
+import 'package:recipes_hub/widget/search_field.dart';
+
+import '../../model/recipes_response.dart';
+import '../detail_screens/recipe_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,17 +23,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late RandomRecipesController randomRecipesController;
+  late RecipesController recipesController;
   final ScrollController scrollController = ScrollController();
+  late TextEditingController searchController = TextEditingController();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
-    randomRecipesController = Get.put(RandomRecipesController());
+    recipesController = Get.put(RecipesController());
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        randomRecipesController.loadMoreProducts();
+        recipesController.loadMoreProducts();
       }
     });
   }
@@ -32,131 +43,98 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Chào ngày mới'),
-        ),
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(10.0),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-              child: Text("Hôm nay bạn muốn nấu món gì?"),
-            ),
-          ),
-        ),
+      key: _scaffoldKey,
+      drawer: Drawer(
+        width: MediaQuery.of(context).size.width - 80,
+        child: DrawerListView(),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text('Chao! User'),
-            // ),
-        /*    Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Tìm gần đây'),
-                  InkWell(
-                    child: Text('Tất cả'),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
+        child: Obx(
+          () {
+            if (recipesController.isLoadingAll.value) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              List<ResultsResponse> recipes = recipesController.recipes;
+              return NotificationListener(
+                  child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Obx(
-                  () {
-                    if (randomRecipesController.isLoadingAll.value) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      List<RecipesModel> recipes =
-                          randomRecipesController.recipes;
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: IconButton(
+                              onPressed: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              },
+                              icon: Icon(Icons.account_circle)),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Chào Long!'),
+                              Text('Hôm nay bạn đang tìm gì?'),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: IconButton(
+                              onPressed: () {
+                                Get.to(SearchScreen());
+                              },
+                              icon: Icon(Icons.search)),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Đề xuất cho bạn!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
                         controller: scrollController,
-                        itemCount: randomRecipesController.recipes.length,
+                        itemCount: recipesController.recipes.length,
                         itemBuilder: (context, index) {
-                          return DishItem(
-                            widthSize: MediaQuery.of(context).size.width,
-                            heightSize: 200,
-                            marginSize: const EdgeInsets.only(right: 10),
-                            urlImage: recipes[index].image ?? '',
-                            dishName: recipes[index].title ?? '',
-                            servingsQuantity: recipes[index].servings ?? 0,
-                            score: recipes[index].spoonacularScore ?? 0,
+                          final recipe = recipes[index];
+                          return InkWell(
+                            onTap: () {
+                              // Get.to(RecipeDetailScreen(recipe: recipe));
+                            },
+                            child: DishItem(
+                              widthSize: MediaQuery.of(context).size.width,
+                              heightSize: 200,
+                              marginSize: const EdgeInsets.only(bottom: 30),
+                              urlImage: recipes[index].image ?? '',
+                              dishName: recipes[index].title ?? '',
+                            ),
                           );
                         },
-                      );
-                    }
-                  },
-                ),
-              ),
-            ),*/
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Đề xuất cho bạn'),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Obx(
-                    () {
-                      if (randomRecipesController.isLoadingAll.value) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                      ),
+                    ),
+                    Obx(() {
+                      if (recipesController.isLoadingList.value) {
+                        return const CircularProgressIndicator();
                       } else {
-                        List<RecipesModel> recipes =
-                            randomRecipesController.recipes;
-                        return NotificationListener(
-                            child: Column(
-                          children: [
-                              Expanded(
-                                child: ListView.builder(
-                                controller: scrollController,
-                                itemCount: randomRecipesController.recipes.length,
-                                itemBuilder: (context, index) {
-                                  return DishItem(
-                                    widthSize: MediaQuery.of(context).size.width,
-                                    heightSize: 200,
-                                    marginSize: const EdgeInsets.only(bottom: 10),
-                                    urlImage: recipes[index].image ?? '',
-                                    dishName: recipes[index].title ?? '',
-                                    servingsQuantity: recipes[index].servings ?? 0,
-                                    score: recipes[index].spoonacularScore ?? 0,
-                                  );
-                                },
-                                                          ),
-                              ),
-                            Obx(() {
-                              if (randomRecipesController.isLoadingList.value) {
-                                return const CircularProgressIndicator();
-                              } else {
-                                return const SizedBox();
-                              }
-                            })
-                          ],
-                        ));
+                        return const SizedBox();
                       }
-                    },
-                  ),
-              ),
-            ),
-          ],
+                    })
+                  ],
+                ),
+              ));
+            }
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -188,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         child: const Icon(
-          Ionicons.filter,
+          Icons.sort,
           color: Colors.white70,
         ),
         backgroundColor: const Color(0xff70B9BE),
@@ -196,4 +174,5 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
+
 }

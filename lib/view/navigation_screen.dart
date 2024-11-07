@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recipes_hub/controller/bottom_nav_controller.dart';
+import 'package:recipes_hub/controller/navigation_controller.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -10,8 +10,8 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  final BottomNavigationController bottomNavigationController =
-      Get.put(BottomNavigationController());
+  final NavigationController navigationController =
+      Get.put(NavigationController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
       //   title: const Text('Recipes Hub'),
       // ),
       body: SafeArea(
-        child: Obx(() => bottomNavigationController.currentScreen),
+        child: Obx(() => navigationController.currentScreen),
       ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          currentIndex: bottomNavigationController.indexScreen.value,
+          currentIndex: navigationController.indexScreen.value,
           onTap: (index) {
-            bottomNavigationController.changeScreen(index);
+            navigationController.changeScreen(index);
           },
           items: [
             BottomNavigationBarItem(
