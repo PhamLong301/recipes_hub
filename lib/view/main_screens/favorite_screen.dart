@@ -23,7 +23,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lưu trữ công thức yêu thích'),
+        title: Text('Công thức yêu thích'),
       ),
       body: SafeArea(
         child: Padding(

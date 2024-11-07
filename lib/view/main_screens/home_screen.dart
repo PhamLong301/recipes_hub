@@ -1,17 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:recipes_hub/controller/recipes_controller.dart';
-import 'package:recipes_hub/view/main_screens/favorite_screen.dart';
 import 'package:recipes_hub/view/main_screens/search_screen.dart';
-import 'package:recipes_hub/view/main_screens/setting_screen.dart';
 import 'package:recipes_hub/widget/dish_item.dart';
 import 'package:recipes_hub/widget/drawer_list_view.dart';
-import 'package:recipes_hub/widget/log_in_widget.dart';
-import 'package:recipes_hub/widget/log_out_wigdet.dart';
-import 'package:recipes_hub/widget/search_field.dart';
-
 import '../../model/recipes_response.dart';
 import '../detail_screens/recipe_detail_screen.dart';
 
@@ -28,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController searchController = TextEditingController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -99,8 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       'Đề xuất cho bạn!',
                       style: TextStyle(
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -110,7 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           final recipe = recipes[index];
                           return InkWell(
                             onTap: () {
-                              // Get.to(RecipeDetailScreen(recipe: recipe));
+                              Get.to(() => RecipeDetailScreen(
+                                id: recipe.id,
+                              ));
                             },
                             child: DishItem(
                               widthSize: MediaQuery.of(context).size.width,
@@ -174,5 +173,4 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
-
 }

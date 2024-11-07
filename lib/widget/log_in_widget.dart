@@ -43,7 +43,7 @@ class LoginWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Đăng nhập vào tài khoản',
+                  'Đăng nhập vào tài khoản của bạn',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -40,6 +40,12 @@ class DrawerListView extends StatelessWidget {
             Get.back();          },
         ),
         ListTile(
+          leading: Icon(Icons.gamepad_outlined),
+          title: Text('Mini game'),
+          onTap: () {
+            Get.back();          },
+        ),
+        ListTile(
           leading: Icon(Icons.delete),
           title: Text('Xóa tài khoản'),
           onTap: () {
