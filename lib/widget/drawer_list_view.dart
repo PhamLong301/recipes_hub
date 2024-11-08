@@ -60,7 +60,7 @@ class DrawerListView extends StatelessWidget {
           leading: Icon(Icons.delete),
           title: Text('Xóa tài khoản'),
           onTap: () {
-            Get.back();
+            alertDeleteAccount();
           },
         ),
         LogoutWidget(),
@@ -117,6 +117,34 @@ class DrawerListView extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void alertDeleteAccount(){
+    Get.dialog(
+        AlertDialog(
+          title: Text('Thông báo'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Bạn chắc chắc muốn xóa tài khoản!'),
+              Row(
+                children: [
+                  TextButton(onPressed: () {}, child: Text('Có',
+                    style: TextStyle(
+                      color: Color(0xff70B9BE),
+                    ),)),
+                  TextButton(onPressed: () {
+                    Get.back();
+                  }, child: Text('Không',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),)),
+                ],
+              ),
+            ],
+          ),
+        )
     );
   }
 }

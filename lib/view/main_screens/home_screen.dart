@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         child: const Icon(
-          Icons.sort,
+          Icons.filter_list,
           color: Colors.white70,
         ),
         backgroundColor: const Color(0xff70B9BE),
