@@ -50,11 +50,11 @@ class _DishItemState extends State<DishItem> {
               height: widget.heightSize,
             ),
           ),
-          const Positioned(
-            right: 5,
-            top: 5,
-            child: Icon(Icons.favorite, color: Colors.white,),
-          ),
+          // const Positioned(
+          //   right: 5,
+          //   top: 5,
+          //   child: Icon(Icons.favorite, color: Colors.white,),
+          // ),
           Positioned(
             left: 5,
             bottom: 10,

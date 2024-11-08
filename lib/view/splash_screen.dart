@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:recipes_hub/view/authentication%20_screen/sign_in_screen.dart';
 import 'package:recipes_hub/view/main_screens/home_screen.dart';
 import 'package:recipes_hub/view/navigation_screen.dart';
 
