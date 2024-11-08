@@ -34,7 +34,7 @@ class _DishItemState extends State<DishItem> {
             color: Colors.grey.withOpacity(1),
             spreadRadius: 2,
             blurRadius: 6,
-            offset: Offset(3, 3),
+            offset: Offset(0, 3),
           ),
         ],
       ),

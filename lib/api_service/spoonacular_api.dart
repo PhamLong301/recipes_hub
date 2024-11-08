@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:recipes_hub/model/recipes_response.dart';
 
+import '../model/detail_recipe_reponse.dart';
 import '../model/random_recipes.dart';
 
 class SpoonacularApi {
@@ -20,7 +21,8 @@ class SpoonacularApi {
     required int skipSize,
   }) async {
     try {
-      final response = await _dio.get('/recipes/complexSearch', queryParameters: {
+      final response =
+          await _dio.get('/recipes/complexSearch', queryParameters: {
         'number': currentSize,
         'offSet': skipSize,
       });
@@ -31,6 +33,22 @@ class SpoonacularApi {
         } catch (_) {
           return null;
         }
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<DetailRecipeResponse?> getDetailInformation({
+    required int? id,
+  }) async {
+    try {
+      final detailResponse =
+        await _dio.get('/recipes/$id/information', queryParameters: {'id': id});
+      if(detailResponse.statusCode == 200){
+        return DetailRecipeResponse.fromJson(detailResponse.data);
+      }else{
+        return null;
       }
     } catch (e) {
       return null;
