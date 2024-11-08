@@ -5,7 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import '../view/authentication_screen/sign_in_screen.dart';
 import 'package:recipes_hub/view/main_screens/home_screen.dart';
 
-class AuthenticationController extends GetxController{
+class AuthenticationController extends GetxController {
   static AuthenticationController instance = Get.find();
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -15,7 +15,8 @@ class AuthenticationController extends GetxController{
         Center(child: CircularProgressIndicator()),
         barrierDismissible: false,
       );
-      await auth.createUserWithEmailAndPassword(email: email, password: password);
+      await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       Get.back();
       Get.offAll(() => SignInScreen());
     } catch (e) {
@@ -40,5 +41,4 @@ class AuthenticationController extends GetxController{
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-
 }

@@ -14,7 +14,7 @@ class LogoutWidget extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xfff5f7fa), // Light gray background color
+              backgroundColor: const Color(0xfff5f7fa), // Light gray background color
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24), // Rounded corners
               ),
@@ -27,14 +27,14 @@ class LogoutWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.exit_to_app,
                     color: Color(0xff70B9BE), // Icon color matching text
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
-                    'Đăng xuất',
-                    style: TextStyle(
+                    'sign_out'.tr,
+                    style: const TextStyle(
                       color: Color(0xff70B9BE),
                       fontSize: 16,
                     ),
@@ -50,20 +50,20 @@ class LogoutWidget extends StatelessWidget {
   void logoutAlertDialog(){
     Get.dialog(
       AlertDialog(
-        title: Text('Thông báo'),
+        title: const Text('Thông báo'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Bạn chắc chắc muốn đăng xuất!'),
+            const Text('Bạn chắc chắc muốn đăng xuất!'),
             Row(
               children: [
-                TextButton(onPressed: () {}, child: Text('Có',
+                TextButton(onPressed: () {}, child: const Text('Có',
                   style: TextStyle(
                     color: Color(0xff70B9BE),
                   ),)),
                 TextButton(onPressed: () {
                   Get.back();
-                }, child: Text('Không',
+                }, child: const Text('Không',
                 style: TextStyle(
                   color: Colors.grey,
                 ),)),

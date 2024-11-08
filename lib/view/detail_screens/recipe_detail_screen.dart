@@ -89,13 +89,13 @@ class RecipeDetailScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Số người ăn : ${response?.servings ?? 0}',
+                                '${'serving'.tr}: ${response?.servings ?? 0}',
                               ),
                               SizedBox(
                                 width: 20,
                               ),
                               Text(
-                                'Thời gian nấu: ${response?.cookingMinutes ?? 0} m',
+                                '${'cooking_minutes'.tr}: ${response?.cookingMinutes ?? 0} m',
                               ),
                             ],
                           ),
@@ -106,12 +106,12 @@ class RecipeDetailScreen extends StatelessWidget {
                                 color: Colors.grey), // tùy chỉnh kiểu chữ
                           ),
                           SizedBox(height: 10),
-                          Text('Điểm sức khỏe: ${response?.healthScore ?? ''}'),
+                          Text('${'health_point'.tr}: ${response?.healthScore ?? ''}'),
                           SizedBox(height: 10),
                           Text(
-                            'Đánh giá của nhà phát triển: ${response?.spoonacularScore ?? ''}',
+                            '${'manufacturer_s_review'.tr}: ${response?.spoonacularScore?.toStringAsFixed(2) ?? ''}',
                           ),
-                          Text('Các bước nấu',
+                          Text('instructions'.tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold

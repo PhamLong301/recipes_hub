@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipes_hub/theme/theme_app.dart';
 import 'package:recipes_hub/view/navigation_screen.dart';
 import 'package:recipes_hub/view/splash_screen.dart';
 
 import 'firebase_options.dart';
+import 'localizations/local_string.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +23,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      translations: LocalString(),
+      locale: const Locale('en', 'US'),
+      theme: ThemeApp.light,
+      darkTheme: ThemeApp.dark,
+      themeMode: ThemeMode.system,
       home: const SplashScreen(),
     );
   }

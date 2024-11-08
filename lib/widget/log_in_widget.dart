@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({super.key});
@@ -43,7 +44,7 @@ class LoginWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Đăng nhập vào tài khoản của bạn',
+                  'sign_in_to_your_account'.tr,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

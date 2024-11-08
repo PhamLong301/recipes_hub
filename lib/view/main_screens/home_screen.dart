@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       drawer: Drawer(
         width: MediaQuery.of(context).size.width - 80,
-        child: DrawerListView(),
+        child: const DrawerListView(),
       ),
       body: SafeArea(
         child: Obx(
@@ -64,15 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () {
                                 _scaffoldKey.currentState?.openDrawer();
                               },
-                              icon: Icon(Icons.account_circle)),
+                              icon: const Icon(Icons.account_circle)),
                         ),
                         Expanded(
                           flex: 4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Chào Long!'),
-                              Text('Hôm nay bạn đang tìm gì?'),
+                              Text('${'hello'.tr}! Long'),
+                              Text('what_you_want_to_cook_today'.tr),
                             ],
                           ),
                         ),
@@ -80,23 +80,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           flex: 1,
                           child: IconButton(
                               onPressed: () {
-                                Get.to(SearchScreen());
+                                Get.to(const SearchScreen());
                               },
-                              icon: Icon(Icons.search)),
+                              icon: const Icon(Icons.search)),
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Text(
-                      'Đề xuất cho bạn!',
-                      style: TextStyle(
+                      'recommended_for_you'.tr,
+                      style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Expanded(
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return Container(
+                    return SizedBox(
                       height: 30,
                       child: Row(
                         children: [
@@ -164,11 +164,11 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           );
         },
+        backgroundColor: const Color(0xff70B9BE),
         child: const Icon(
           Icons.filter_list,
           color: Colors.white70,
         ),
-        backgroundColor: const Color(0xff70B9BE),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

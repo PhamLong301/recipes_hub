@@ -1,9 +1,9 @@
+import 'package:recipes_hub/controller/language_controller.dart';
 import '../view/authentication_screen/sign_up_screen.dart';
 import 'log_in_widget.dart';
 import 'log_out_wigdet.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import '../view/main_screens/favorite_screen.dart';
 import '../view/authentication_screen/sign_in_screen.dart';
 
 class DrawerListView extends StatelessWidget {
@@ -15,55 +15,55 @@ class DrawerListView extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color(0xff70B9BE),
           ),
           child: GestureDetector(
             onTap: () {
-              Get.to(() => SignInScreen());
+              Get.to(() => const SignInScreen());
             },
-            child: LoginWidget(),
+            child: const LoginWidget(),
           ),
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.favorite,
             color: Colors.red,
           ),
-          title: Text('Favorites'),
+          title: Text('favorites'.tr),
           onTap: () {
             alertDialog();
           },
         ),
         ListTile(
-          leading: Icon(Icons.language),
-          title: Text('Ngôn ngữ'),
+          leading: const Icon(Icons.language),
+          title: Text('changeLanguage'.tr),
+          onTap: () {
+            changeLanguage();
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.dark_mode),
+          title: Text('theme'.tr),
           onTap: () {
             Get.back();
           },
         ),
         ListTile(
-          leading: Icon(Icons.dark_mode),
-          title: Text('Theme'),
+          leading: const Icon(Icons.gamepad_outlined),
+          title: Text('mini_game'.tr),
           onTap: () {
             Get.back();
           },
         ),
         ListTile(
-          leading: Icon(Icons.gamepad_outlined),
-          title: Text('Mini game'),
-          onTap: () {
-            Get.back();
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.delete),
-          title: Text('Xóa tài khoản'),
+          leading: const Icon(Icons.delete),
+          title: Text('delete_account'.tr),
           onTap: () {
             alertDeleteAccount();
           },
         ),
-        LogoutWidget(),
+        const LogoutWidget(),
       ],
     );
   }
@@ -71,14 +71,14 @@ class DrawerListView extends StatelessWidget {
   void alertDialog() {
     Get.dialog(
       AlertDialog(
-        title: Text('Thông báo'),
+        title: Text('notice'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Không thể mở danh sách yêu thích!'),
-            Text('Bạn chưa đăng nhặp hoặc chưa có tài khoản!'),
+            Text('can_not_open_favorite_list'.tr),
+            Text('have_not_login_or_account'.tr),
             Text(
-                'Hãy đăng nhập hoặc tạo tài khoản để lưu lại công thức yêu thích!'),
+                'login_or_create_account'.tr),
           ],
         ),
         actions: [
@@ -86,7 +86,7 @@ class DrawerListView extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            child: Text(
+            child: const Text(
               'Hủy',
               style: TextStyle(
                 color: Color(0xff70B9BE),
@@ -95,9 +95,9 @@ class DrawerListView extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.to(() => SignInScreen());
+              Get.to(() => const SignInScreen());
             },
-            child: Text(
+            child: const Text(
               'Đăng nhập ngay!',
               style: TextStyle(
                 color: Color(0xff70B9BE),
@@ -106,9 +106,9 @@ class DrawerListView extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.to(() => SignUpScreen());
+              Get.to(() => const SignUpScreen());
             },
-            child: Text(
+            child: const Text(
               'Tạo tài khoản!',
               style: TextStyle(
                 color: Color(0xff70B9BE),
@@ -123,21 +123,21 @@ class DrawerListView extends StatelessWidget {
   void alertDeleteAccount(){
     Get.dialog(
         AlertDialog(
-          title: Text('Thông báo'),
+          title: Text('notice'.tr),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Bạn chắc chắc muốn xóa tài khoản!'),
+              Text('ask_for_delete'.tr),
               Row(
                 children: [
-                  TextButton(onPressed: () {}, child: Text('Có',
-                    style: TextStyle(
+                  TextButton(onPressed: () {}, child: Text('yes'.tr,
+                    style: const TextStyle(
                       color: Color(0xff70B9BE),
                     ),)),
                   TextButton(onPressed: () {
                     Get.back();
-                  }, child: Text('Không',
-                    style: TextStyle(
+                  }, child: Text('no'.tr,
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),)),
                 ],
@@ -145,6 +145,32 @@ class DrawerListView extends StatelessWidget {
             ],
           ),
         )
+    );
+  }
+
+  void changeLanguage() {
+    final LanguageController languageController = Get.put(LanguageController());
+    Get.dialog(
+      AlertDialog(
+        title: Text("changeLanguage".tr),
+        content: ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            final currentLocal =
+            languageController.localizations[index]['local'];
+            final currentLanguage =
+            languageController.localizations[index]['name'];
+            return InkWell(
+              onTap: () {
+                Get.updateLocale(currentLocal);
+                Get.back();
+              },
+              child: Text(currentLanguage),
+            );
+          },
+          itemCount: languageController.localizations.length,
+        ),
+      ),
     );
   }
 }
