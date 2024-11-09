@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:recipes_hub/model/user_informaiton_model.dart';
+import 'package:recipes_hub/model/user_information_model.dart';
 import 'package:uuid/uuid.dart';
 
 class FirebaseUserStorage {

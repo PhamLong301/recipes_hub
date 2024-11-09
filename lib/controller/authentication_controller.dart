@@ -9,7 +9,7 @@ class AuthenticationController extends GetxController {
   static AuthenticationController instance = Get.find();
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> register(String email, String password) async {
+  Future<void> register(String email, String password, ) async {
     try {
       Get.dialog(
         Center(child: CircularProgressIndicator()),
@@ -37,8 +37,23 @@ class AuthenticationController extends GetxController {
       Get.offAll(() => HomeScreen());
     } catch (e) {
       Get.back();
-      Get.snackbar("Lỗi đăng nhập", e.toString(),
+      Get.snackbar("error".tr, e.toString(),
           snackPosition: SnackPosition.BOTTOM);
     }
+  }
+
+  Future<void> signOut() async {
+    await auth.signOut();
+    Get.offAll(() => HomeScreen());
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    auth.authStateChanges().listen((User? user) {
+      if(user != null){
+        Get.offAll(() => const HomeScreen());
+        }
+    });
   }
 }

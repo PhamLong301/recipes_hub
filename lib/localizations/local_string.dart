@@ -7,6 +7,7 @@ class LocalString extends Translations{
     "en_US" : {
       "yes" : "Yes",
       "no" : "No",
+      "error" : "Error",
       "notice" : "Notice",
       "english" : "English",
       "vietnamese" : "Vietnamese",
@@ -32,10 +33,14 @@ class LocalString extends Translations{
       "have_not_login_or_account" : "You haven't logged in or don't have an account yet!",
       "login_or_create_account" : "Log in or create an account to save your favorite recipes!",
       "serving" : "Serving",
+      "confirm_not_match" : "Confirmation password doesn't match",
+      "welcome_back" : "Welcome back",
+      "we_missed_you" : "We missed you",
     },
     "vi_VN" : {
       "yes" : "Có",
       "no" : "Không",
+      "error" : "Lỗi",
       "notice" : "Thông báo",
       "english" : "Tiếng Anh",
       "vietnamese" : "Tiếng Việt",
@@ -60,7 +65,10 @@ class LocalString extends Translations{
       "can_not_open_favorite_list" : "Không thể mở danh sách yêu thích của bạn!",
       "have_not_login_or_account" : "Bạn chưa đăng nhặp hoặc chưa có tài khoản!",
       "login_or_create_account" : "Hãy đăng nhập hoặc tạo tài khoản để lưu lại công thức yêu thích!",
-      "serving" : "Số người ăn"
+      "serving" : "Số người ăn",
+      "confirm_not_match" : "Mật khẩu xác nhận không khớp",
+      "welcome_back" : "Chào mừng trở lại",
+      "we_missed_you" : "Chúng tôi rất nhớ bạn đấy",
     },
   };
 }

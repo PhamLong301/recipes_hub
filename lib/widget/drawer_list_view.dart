@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:recipes_hub/controller/authentication_controller.dart';
 import 'package:recipes_hub/controller/language_controller.dart';
 import 'package:recipes_hub/controller/theme_controller.dart';
+import 'package:recipes_hub/view/main_screens/favorite_screen.dart';
 import '../view/authentication_screen/sign_up_screen.dart';
+import '../view/main_screens/home_screen.dart';
 import 'log_in_widget.dart';
 import 'log_out_widget.dart';
 import 'package:get/get.dart';
@@ -13,6 +17,7 @@ class DrawerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.put(ThemeController());
+    final AuthenticationController authController = Get.put(AuthenticationController());
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -34,7 +39,13 @@ class DrawerListView extends StatelessWidget {
           ),
           title: Text('favorites'.tr),
           onTap: () {
-            alertDialog();
+            authController.auth.authStateChanges().listen((User? user) {
+              if (user == null) {
+                alertDialog();
+              } else {
+                Get.to(() => FavoriteScreen());
+              }
+            });
           },
         ),
         ListTile(

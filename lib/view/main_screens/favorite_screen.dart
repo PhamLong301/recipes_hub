@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 import '../../widget/dish_item.dart';
 import '../../widget/search_field.dart';
@@ -23,6 +24,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // leading: IconButton(onPressed: () {
+        //   Get.back();
+        // }, icon: Icon(Icons.arrow_back)),
         title: Text('Công thức yêu thích'),
       ),
       body: SafeArea(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:recipes_hub/controller/recipes_controller.dart';
@@ -53,7 +54,6 @@ class RecipeDetailScreen extends StatelessWidget {
                                   onPressed: () => Get.back(),
                                   icon: Icon(
                                     Icons.arrow_back,
-                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -64,8 +64,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                 child: IconButton(
                                   onPressed: () {},
                                   icon: Icon(
-                                    Icons.favorite,
-                                    color: Colors.white,
+                                    Icons.favorite_border,
                                   ),
                                 ),
                               ),
@@ -80,10 +79,19 @@ class RecipeDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            response?.title ?? '',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  response?.title ?? '',
+                                  style: TextStyle(
+                                      fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              IconButton(onPressed: () {
+
+                              }, icon: Icon(Icons.favorite_border))
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -121,16 +129,15 @@ class RecipeDetailScreen extends StatelessWidget {
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               itemCount: response
-                                  ?.analyzedInstructions![0].steps!.length,
+                                  ?.analyzedInstructions?[0].steps?.length,
                               itemBuilder: (context, index) {
                                 final step = response
-                                    ?.analyzedInstructions![0].steps![index];
+                                    ?.analyzedInstructions?[0].steps?[index];
                                 return ListTile(
                                   leading: CircleAvatar(
-                                    child: Text('${step?.number}'),
+                                    child: Text('${step?.number ?? 0}'),
                                   ),
-                                  title:
-                                      Text(step?.step ?? "No step description"),
+                                  title:Text(step?.step ?? "No step description"),
                                 );
                               },
                             )

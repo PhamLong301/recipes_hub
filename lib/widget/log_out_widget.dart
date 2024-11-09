@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipes_hub/controller/authentication_controller.dart';
 
 class LogoutWidget extends StatelessWidget {
   const LogoutWidget({super.key});
@@ -48,6 +49,7 @@ class LogoutWidget extends StatelessWidget {
   }
 
   void logoutAlertDialog(){
+    final AuthenticationController authController = Get.put(AuthenticationController());
     Get.dialog(
       AlertDialog(
         title: const Text('Thông báo'),
@@ -57,7 +59,9 @@ class LogoutWidget extends StatelessWidget {
             const Text('Bạn chắc chắc muốn đăng xuất!'),
             Row(
               children: [
-                TextButton(onPressed: () {}, child: const Text('Có',
+                TextButton(onPressed: () {
+                  authController.signOut();
+                }, child: const Text('Có',
                   style: TextStyle(
                     color: Color(0xff70B9BE),
                   ),)),
