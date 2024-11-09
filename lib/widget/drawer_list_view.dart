@@ -45,15 +45,9 @@ class DrawerListView extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: themeController.isDarkTheme.value
-              ? Icon(
-                  Icons.dark_mode,
-                  color: Colors.white,
-                )
-              : Icon(
-                  Icons.light_mode,
-                  color: Colors.yellow,
-                ),
+          leading: Obx(() => themeController.isDarkTheme.value
+              ? const Icon(Icons.light_mode, color: Colors.yellow)
+              : const Icon(Icons.dark_mode, color: Colors.white)),
           title: Text('theme'.tr),
           onTap: () {
             themeController.toggleTheme();
