@@ -1,7 +1,8 @@
 import 'package:recipes_hub/controller/language_controller.dart';
+import 'package:recipes_hub/controller/theme_controller.dart';
 import '../view/authentication_screen/sign_up_screen.dart';
 import 'log_in_widget.dart';
-import 'log_out_wigdet.dart';
+import 'log_out_widget.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../view/authentication_screen/sign_in_screen.dart';
@@ -11,6 +12,7 @@ class DrawerListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.put(ThemeController());
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -43,10 +45,18 @@ class DrawerListView extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.dark_mode),
+          leading: themeController.isDarkTheme.value
+              ? Icon(
+                  Icons.dark_mode,
+                  color: Colors.white,
+                )
+              : Icon(
+                  Icons.light_mode,
+                  color: Colors.yellow,
+                ),
           title: Text('theme'.tr),
           onTap: () {
-            Get.back();
+            themeController.toggleTheme();
           },
         ),
         ListTile(
@@ -77,8 +87,7 @@ class DrawerListView extends StatelessWidget {
           children: [
             Text('can_not_open_favorite_list'.tr),
             Text('have_not_login_or_account'.tr),
-            Text(
-                'login_or_create_account'.tr),
+            Text('login_or_create_account'.tr),
           ],
         ),
         actions: [
@@ -120,32 +129,38 @@ class DrawerListView extends StatelessWidget {
     );
   }
 
-  void alertDeleteAccount(){
-    Get.dialog(
-        AlertDialog(
-          title: Text('notice'.tr),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
+  void alertDeleteAccount() {
+    Get.dialog(AlertDialog(
+      title: Text('notice'.tr),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('ask_for_delete'.tr),
+          Row(
             children: [
-              Text('ask_for_delete'.tr),
-              Row(
-                children: [
-                  TextButton(onPressed: () {}, child: Text('yes'.tr,
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'yes'.tr,
                     style: const TextStyle(
                       color: Color(0xff70B9BE),
-                    ),)),
-                  TextButton(onPressed: () {
+                    ),
+                  )),
+              TextButton(
+                  onPressed: () {
                     Get.back();
-                  }, child: Text('no'.tr,
+                  },
+                  child: Text(
+                    'no'.tr,
                     style: const TextStyle(
                       color: Colors.grey,
-                    ),)),
-                ],
-              ),
+                    ),
+                  )),
             ],
           ),
-        )
-    );
+        ],
+      ),
+    ));
   }
 
   void changeLanguage() {
@@ -157,9 +172,9 @@ class DrawerListView extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             final currentLocal =
-            languageController.localizations[index]['local'];
+                languageController.localizations[index]['local'];
             final currentLanguage =
-            languageController.localizations[index]['name'];
+                languageController.localizations[index]['name'];
             return InkWell(
               onTap: () {
                 Get.updateLocale(currentLocal);

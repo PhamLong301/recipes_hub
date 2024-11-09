@@ -40,57 +40,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
             key: controller.formKey,
             child: Column(
               children: [
-                TextFormField(
-                  cursorColor: const Color(0xff70B9BE),
-                  controller: controller.firstNameController,
-                  decoration: InputDecoration(
-                    labelText: "Tên",
-                    labelStyle: const TextStyle(
-                      color: Color(0xff70B9BE),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                        color: Color(0xff70B9BE),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  validator: controller.checkBlank,
-                ),
+                // TextFormField(
+                //   cursorColor: const Color(0xff70B9BE),
+                //   controller: controller.firstNameController,
+                //   decoration: InputDecoration(
+                //     labelText: "Tên",
+                //     labelStyle: const TextStyle(
+                //       color: Color(0xff70B9BE),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(25.0),
+                //       borderSide: const BorderSide(
+                //         color: Color(0xff70B9BE),
+                //       ),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(25.0),
+                //       borderSide: const BorderSide(
+                //         color: Colors.grey,
+                //         width: 1.0,
+                //       ),
+                //     ),
+                //   ),
+                //   validator: controller.checkBlank,
+                // ),
                 const SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  cursorColor: const Color(0xff70B9BE),
-                  controller: controller.lastNameController,
-                  decoration: InputDecoration(
-                    labelText: "Họ",
-                    labelStyle: const TextStyle(
-                      color: Color(0xff70B9BE),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                        color: Color(0xff70B9BE),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
-                  validator: controller.checkBlank,
-                ),
+                // TextFormField(
+                //   cursorColor: const Color(0xff70B9BE),
+                //   controller: controller.lastNameController,
+                //   decoration: InputDecoration(
+                //     labelText: "Họ",
+                //     labelStyle: const TextStyle(
+                //       color: Color(0xff70B9BE),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(25.0),
+                //       borderSide: const BorderSide(
+                //         color: Color(0xff70B9BE),
+                //       ),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(25.0),
+                //       borderSide: const BorderSide(
+                //         color: Colors.grey,
+                //         width: 1.0,
+                //       ),
+                //     ),
+                //   ),
+                //   validator: controller.checkBlank,
+                // ),
                 const SizedBox(
                   height: 16,
                 ),

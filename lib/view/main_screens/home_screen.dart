@@ -42,98 +42,103 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const DrawerListView(),
       ),
       body: SafeArea(
-        child: Obx(
-          () {
-            if (recipesController.isLoadingAll.value) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              List<ResultsResponse> recipes = recipesController.recipes;
-              return NotificationListener(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                              onPressed: () {
-                                _scaffoldKey.currentState?.openDrawer();
-                              },
-                              icon: const Icon(Icons.account_circle)),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${'hello'.tr}! Long'),
-                              Text('what_you_want_to_cook_today'.tr),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                              onPressed: () {
-                                Get.to(const SearchScreen());
-                              },
-                              icon: const Icon(Icons.search)),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      'recommended_for_you'.tr,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: recipesController.recipes.length,
-                        itemBuilder: (context, index) {
-                          final recipe = recipes[index];
-                          return InkWell(
-                            onTap: () {
-                              Get.to(() => RecipeDetailScreen(
-                                id: recipe.id,
-                              ));
-                            },
-                            child: DishItem(
-                              widthSize: MediaQuery.of(context).size.width,
-                              heightSize: 200,
-                              marginSize: const EdgeInsets.only(bottom: 30),
-                              urlImage: recipes[index].image ?? '',
-                              dishName: recipes[index].title ?? '',
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Obx(() {
-                      if (recipesController.isLoadingList.value) {
-                        return const CircularProgressIndicator();
-                      } else {
-                        return const SizedBox();
-                      }
-                    })
-                  ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      },
+                      icon: const Icon(Icons.account_circle)),
                 ),
-              ));
-            }
-          },
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${'hello'.tr}! Long'),
+                      Text('what_you_want_to_cook_today'.tr),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      onPressed: () {
+                        Get.to(const SearchScreen());
+                      },
+                      icon: const Icon(Icons.search)),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'recommended_for_you'.tr,
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () {
+                  if (recipesController.isLoadingAll.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    List<ResultsResponse> recipes = recipesController.recipes;
+                    return NotificationListener(
+                        child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              controller: scrollController,
+                              itemCount: recipesController.recipes.length,
+                              itemBuilder: (context, index) {
+                                final recipe = recipes[index];
+                                return InkWell(
+                                  onTap: () {
+                                    Get.to(() => RecipeDetailScreen(
+                                          id: recipe.id,
+                                        ));
+                                  },
+                                  child: DishItem(
+                                    widthSize:
+                                        MediaQuery.of(context).size.width,
+                                    heightSize: 200,
+                                    marginSize:
+                                        const EdgeInsets.only(bottom: 30),
+                                    urlImage: recipes[index].image ?? '',
+                                    dishName: recipes[index].title ?? '',
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Obx(() {
+                            if (recipesController.isLoadingList.value) {
+                              return const CircularProgressIndicator();
+                            } else {
+                              return const SizedBox();
+                            }
+                          })
+                        ],
+                      ),
+                    ));
+                  }
+                },
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(

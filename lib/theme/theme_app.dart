@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class ThemeApp {
   static final light = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.green,
-    appBarTheme: const AppBarTheme(color: Colors.orangeAccent),
+    primaryColor: const Color(0xff70B9BE),
+    appBarTheme: const AppBarTheme(color: Colors.white),
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: 'Roboto',
+    fontFamily: '',
     textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.red,
+          color: Colors.black,
         ),
         titleLarge: TextStyle(
           fontSize: 30,
@@ -20,14 +20,14 @@ class ThemeApp {
   static final dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.green[800],
-    appBarTheme: const AppBarTheme(color: Colors.deepOrange),
+    appBarTheme: const AppBarTheme(color: Colors.grey),
     scaffoldBackgroundColor: Colors.grey,
-    fontFamily: 'Roboto',
+    fontFamily: '',
     textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.red,
+          color: Colors.white,
         ),
         titleLarge: TextStyle(
           fontSize: 30,
