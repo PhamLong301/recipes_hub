@@ -9,7 +9,7 @@ class ThemeApp {
     fontFamily: '',
     textTheme: const TextTheme(
         displayLarge: TextStyle(
-          fontSize: 20,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
@@ -25,7 +25,7 @@ class ThemeApp {
     fontFamily: '',
     textTheme: const TextTheme(
         displayLarge: TextStyle(
-          fontSize: 20,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),

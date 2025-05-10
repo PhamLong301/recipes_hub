@@ -34,7 +34,7 @@ class TextFieldController extends GetxController {
     } else if (!RegExp(
             r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$')
         .hasMatch(value)) {
-      return 'Mật khẩu tối thiểu phải 6 ký tự, có chữ in hoa và ký tự đặc biệt';
+      return 'Mật khẩu tối thiểu phải 6 ký tự, có chữ in hoa, số và ký tự đặc biệt';
     }
     return null;
   }

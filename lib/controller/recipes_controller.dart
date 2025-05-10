@@ -7,8 +7,10 @@ class RecipesController extends GetxController {
   final RxList<ResultsResponse> recipes = <ResultsResponse>[].obs;
   final RxBool isLoadingList = false.obs;
   final RxBool isLoadingAll = false.obs;
+  final RxBool isSearching = false.obs;
 
-  final Rxn<DetailRecipeResponse> detailRecipeResponse = Rxn<DetailRecipeResponse>();
+  final Rxn<DetailRecipeResponse> detailRecipeResponse =
+      Rxn<DetailRecipeResponse>();
   final SpoonacularApi spoonacularApi = SpoonacularApi();
 
   final int pageSize = 10;
@@ -56,6 +58,32 @@ class RecipesController extends GetxController {
     }
   }
 
+  Future<void> getSearchRecipes(String query) async {
+    if (query.isEmpty) {
+      isSearching.value = false;
+      recipes.clear();
+      skipSize = 0;
+      await getRecipes();
+      return;
+    }
+
+    isSearching.value = true;
+    isLoadingAll.value = true;
+    final RecipesResponse? response = await spoonacularApi.searchRecipes(
+      query: query,
+      currentSize: pageSize,
+      skipSize: 0,
+    );
+    isLoadingAll.value = false;
+
+    if (response != null) {
+      recipes.assignAll(response.results ?? []);
+    } else {
+      handleError();
+    }
+    isSearching.value = false;
+  }
+
   void handleError() {
     Get.snackbar('Error Loading data!', ':((');
   }
@@ -65,9 +93,9 @@ class RecipesController extends GetxController {
   }) async {
     DetailRecipeResponse? detailResponse =
         await spoonacularApi.getDetailInformation(id: id);
-    if(detailResponse != null){
+    if (detailResponse != null) {
       detailRecipeResponse.value = detailResponse;
-    }else{
+    } else {
       handleError();
     }
   }

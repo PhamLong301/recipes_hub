@@ -24,7 +24,7 @@ class SpoonacularApi {
       final response =
           await _dio.get('/recipes/complexSearch', queryParameters: {
         'number': currentSize,
-        'offSet': skipSize,
+        'offset': skipSize,
       });
       if (response.statusCode == 200) {
         try {
@@ -49,6 +49,31 @@ class SpoonacularApi {
         return DetailRecipeResponse.fromJson(detailResponse.data);
       }else{
         return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<RecipesResponse?> searchRecipes({
+    required String query,
+    required int currentSize,
+    required int skipSize,
+  }) async {
+    try {
+      final response =
+      await _dio.get('/recipes/complexSearch', queryParameters: {
+        'query' : query,
+        'number': currentSize,
+        'offset': skipSize,
+      });
+      if (response.statusCode == 200) {
+        try {
+          return RecipesResponse.fromJson(
+              response.data as Map<String, dynamic>);
+        } catch (_) {
+          return null;
+        }
       }
     } catch (e) {
       return null;

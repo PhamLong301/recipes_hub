@@ -1,6 +1,6 @@
 # recipes_hub
 
-A new Flutter project.
+A Recipes Flutter project.
 
 ## Getting Started
 

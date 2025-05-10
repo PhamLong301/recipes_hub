@@ -3,8 +3,8 @@ import 'package:recipes_hub/controller/authentication_controller.dart';
 import 'package:recipes_hub/controller/language_controller.dart';
 import 'package:recipes_hub/controller/theme_controller.dart';
 import 'package:recipes_hub/view/main_screens/favorite_screen.dart';
+import 'package:recipes_hub/widget/welcome_widget.dart';
 import '../view/authentication_screen/sign_up_screen.dart';
-import '../view/main_screens/home_screen.dart';
 import 'log_in_widget.dart';
 import 'log_out_widget.dart';
 import 'package:get/get.dart';
@@ -17,7 +17,8 @@ class DrawerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.put(ThemeController());
-    final AuthenticationController authController = Get.put(AuthenticationController());
+    final AuthenticationController authController =
+        Get.put(AuthenticationController());
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -25,12 +26,14 @@ class DrawerListView extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Color(0xff70B9BE),
           ),
-          child: GestureDetector(
-            onTap: () {
-              Get.to(() => const SignInScreen());
-            },
-            child: const LoginWidget(),
-          ),
+          child: Obx(() => authController.isSignIn.value
+              ? GestureDetector(
+                  onTap: () {
+                    Get.to(() => const SignInScreen());
+                  },
+                  child: const LoginWidget(),
+                )
+              : const WelcomeWidget(),),
         ),
         ListTile(
           leading: const Icon(
@@ -43,7 +46,7 @@ class DrawerListView extends StatelessWidget {
               if (user == null) {
                 alertDialog();
               } else {
-                Get.to(() => FavoriteScreen());
+                Get.to(() => const FavoriteScreen());
               }
             });
           },
@@ -144,7 +147,9 @@ class DrawerListView extends StatelessWidget {
           Row(
             children: [
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: Text(
                     'yes'.tr,
                     style: const TextStyle(

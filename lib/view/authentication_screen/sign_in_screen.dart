@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipes_hub/controller/authentication_controller.dart';
 import 'package:recipes_hub/controller/text_field_controller.dart';
 import 'package:recipes_hub/view/authentication_screen/sign_up_screen.dart';
 
@@ -11,9 +12,19 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+    late TextFieldController controller;
+    late AuthenticationController authController;
+
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = Get.put(TextFieldController());
+    authController = Get.put(AuthenticationController());
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextFieldController controller = Get.put(TextFieldController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Đăng nhập'),
@@ -79,7 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Get.back();
+                    authController.login(
+                        controller.emailController.text.trim(),
+                        controller.passwordController.text.trim());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff70B9BE),
