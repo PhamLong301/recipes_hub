@@ -2,6 +2,12 @@
 
 A Recipes Flutter project.
 
+Flutter version: 3.19.6
+
+Dart version: 3.3.4
+
+[Link slide](https://docs.google.com/presentation/d/1NJeXeOH5-6nTqswTBp_Twvj6N-pVxm0sRExWGkDpDhk/edit#slide=id.p1)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
